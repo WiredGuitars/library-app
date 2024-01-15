@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+
+  p Are you sure you want to delete the genre "#{genre.name}"?
+
+  if genreBooks.length > 0
+    h3 Genre has the following books:
+    ul
+      each book in genreBooks
+        li= book.title
+
+  form(method='POST')
+    input(type='hidden', name='genreid', value=genre._id)
+    button.btn.btn-danger(type='submit') Delete Genre

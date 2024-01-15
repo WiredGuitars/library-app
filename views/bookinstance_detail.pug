@@ -16,5 +16,7 @@ block content
     else
       span.text-warning #{bookinstance.status}
 
-  if bookinstance.status!='Available'
+  if bookinstance.status != 'Available'
     p #[strong Due back:] #{bookinstance.due_back_formatted}
+
+  a.btn.btn-danger(href=`${bookinstance.url}/delete`) Delete BookInstance

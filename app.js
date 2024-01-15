@@ -11,7 +11,7 @@ const catalogRouter = require("./routes/catalog");
 const app = express();
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
-const mongoDB = "mongodb+srv://wired:XfW1b9WVfH7pqn6d@cluster0.pqubzkj.mongodb.net/?retryWrites=true&w=majority";
+const mongoDB = "mongodb+srv://wired:sgg6LliEgy5u7N3k@cluster0.pqubzkj.mongodb.net/?retryWrites=true&w=majority";
 
 main().catch((err) => console.log(err));
 async function main() {
