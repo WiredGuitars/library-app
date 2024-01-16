@@ -175,7 +175,8 @@ exports.book_delete_post = asyncHandler(async (req, res, next) => {
     // Delete book
     await Book.findByIdAndDelete(bookId);
 
-    // Additional logic to delete related data (e.g., BookInstances)
+    // Delete related BookInstances
+    await BookInstance.deleteMany({ book: bookId });
 
     // Redirect to the book list after deletion
     res.redirect('/catalog/books');
@@ -186,7 +187,6 @@ exports.book_delete_post = asyncHandler(async (req, res, next) => {
 });
 
 
-// Display book update form on GET.
 // Display book update form on GET.
 exports.book_update_get = asyncHandler(async (req, res, next) => {
   // Get book, authors and genres for form.

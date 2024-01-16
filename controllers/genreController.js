@@ -104,17 +104,31 @@ exports.genre_delete_get = asyncHandler(async (req, res, next) => {
 });
 
 exports.genre_delete_post = asyncHandler(async (req, res, next) => {
+  const genreId = req.body.genreid;
+
+  // Find books associated with the genre
+  const associatedBooks = await Book.find({ genre: genreId });
+
+  // Extract book IDs
+  const bookIds = associatedBooks.map(book => book._id);
+
   // Assume valid genre id, so no need for validation/sanitization.
   await Promise.all([
-    Genre.findByIdAndDelete(req.body.genreid),
+    // Remove the genre itself
+    Genre.findByIdAndDelete(genreId),
+
     // Remove books associated with the genre.
-    Book.deleteMany({ genre: req.body.genreid }),
-    Bookinstance.deleteMany({ genre: req.body.genreid }),
+    Book.deleteMany({ genre: { $in: [genreId] } }),
+
+    // Remove book instances associated with the genre.
+    Bookinstance.deleteMany({ book: { $in: bookIds } }),
   ]);
 
   // Redirect to genre list after deletion.
   res.redirect('/catalog/genres');
 });
+
+
 
 
 // Display Genre update form on GET.

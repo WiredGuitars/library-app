@@ -13,7 +13,6 @@ const BookInstanceSchema = new Schema({
     enum: ["Available", "Maintenance", "Loaned", "Reserved"],
     default: "Maintenance",
   },
-  
 });
 
 // Virtual for bookinstance's URL
