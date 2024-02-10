@@ -2,8 +2,12 @@
   "name": "express-locallibrary-tutorial",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
-    "dev": "nodemon ./bin/www"
+    "dev": "node ./bin/www",
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
